@@ -1,0 +1,3 @@
+[submodule "circuits/circom-pairing"]
+	path = circuits/circom-pairing
+	url = https://github.com/SleepingShell/circom-pairing
