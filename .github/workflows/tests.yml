@@ -27,14 +27,14 @@ jobs:
           wget -qO /home/runner/work/circom https://github.com/iden3/circom/releases/download/v2.1.5/circom-linux-amd64
           chmod +x /home/runner/work/circom
           sudo mv /home/runner/work/circom /bin/circom
-
+          
       - name: Print Circom version
         run: circom --version
 
       - name: Install dependencies
         run: | 
-        git submodule update --init
-        yarn
+          git submodule update --init
+          yarn
 
       - name: Run tests
         run: yarn test
