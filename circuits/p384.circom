@@ -11,12 +11,8 @@ template P384AddUnequal(n, k) {
     var params[4][8] = get_p384_params();
     component adder = EllipticCurveAddUnequal(n, k, params[2]);
 
-    for (var i = 0; i < 8; i++) {
-        adder.a[0][i] <== a[0][i];
-        adder.a[1][i] <== a[1][i];
-        adder.b[0][i] <== b[0][i];
-        adder.b[1][i] <== b[1][i];
-    }
+    adder.a <== a;
+    adder.b <== b;
 
     signal output out[2][k] <== adder.out;
 

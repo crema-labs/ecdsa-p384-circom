@@ -16,3 +16,14 @@ export function splitToWords(number: bigint, wordsize: bigint, numberElement: bi
   }
   return words;
 }
+
+export function wordsToBigInt(words: bigint[], wordsize: bigint, numberElement: bigint): bigint {
+  let t = BigInt(0);
+  for (let i = 0; i < numberElement; ++i) {
+    t <<= wordsize;
+    t |= words[Number(numberElement) - i - 1];
+  }
+  return t;
+}
+
+
