@@ -23,6 +23,3 @@ console.log(`n_words: ${n_words}`);
 console.log(`p_words: ${p_words}`);
 console.log(`a_words: ${a_words}`);
 console.log(`b_words: ${b_words}`);
-
-console.log(wordsToBigInt(splitToWords(N, 48n, 8n), 48n, 8n));
-console.log(wordsToBigInt([BigInt(74290503608976), BigInt(142204977253207), BigInt(188623521192770), BigInt(83637982657367), BigInt(150886105008335), BigInt(28306604237765), BigInt(270002625999298), BigInt(187949576258281)].reverse(), 48n, 8n));

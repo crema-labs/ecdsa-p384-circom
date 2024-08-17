@@ -25,5 +25,3 @@ export function wordsToBigInt(words: bigint[], wordsize: bigint, numberElement: 
   }
   return t;
 }
-
-
