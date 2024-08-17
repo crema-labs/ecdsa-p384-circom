@@ -42,10 +42,10 @@ yarn test -g <template-name>
 
 | Operation                      | Constraints | Time (ms) |
 | ------------------------------ | ----------- | --------- |
-| ECDSA Signature Verification   | 4,429,227   | 4,213,940 |
+| ECDSA Signature Verification   | 4,429,227   | 4,21,394 |
 | ECDSA Point Addition (Unequal) | 4,352       | 850       |
 | ECDSA Point Addition (Equal)   | 6,000       | 573       |
-| ECDSA Scalar Multiplication    | 3,977,848   | 420964    |
+| ECDSA Scalar Multiplication    | 3,977,848   | 4,20,964    |
 
 # Acknowledgments
 
