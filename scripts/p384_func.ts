@@ -6,7 +6,7 @@ const EC = new elliptic.ec("p384");
 const N = hexToBigInt(EC.curve.n.toString(16));
 const P = hexToBigInt(EC.curve.p.toString(16));
 const A = hexToBigInt(EC.curve.p.toString(16)) - BigInt(3n);
-const B = BigInt('0xb3312fa7e23ee7e4988e056be3f82d19181d9c6efe8141120314088f5013875ac656398d8a2ed19d2a85c8edd3ec2aef');
+const B = BigInt("0xb3312fa7e23ee7e4988e056be3f82d19181d9c6efe8141120314088f5013875ac656398d8a2ed19d2a85c8edd3ec2aef");
 
 console.log(`N: ${N}`);
 console.log(`P: ${P}`);
