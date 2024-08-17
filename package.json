@@ -2,7 +2,7 @@
   "description": "Circomkit Template",
   "scripts": {
     "start": "npx ts-node ./src/index.ts",
-    "test": "npx mocha",
+    "test": "NODE_OPTIONS=--max-old-space-size=51200 npx mocha --timeout 1000000000",
     "compile:test": "npx circomkit compile add && npx circomkit prove add default && npx circomkit verify add default"
   },
   "dependencies": {

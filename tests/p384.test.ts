@@ -29,7 +29,6 @@ describe("ECDSA P384", () => {
 
     describe("should compute properly", async () => {
       for (let i = 1; i < 19; i++) {
-        // Test case k=20 : we don't have result for that
         const currentPoint = P384TestCases[i];
         const currentPoint_X = currentPoint.x;
         const currentPoint_Y = currentPoint.y;
@@ -82,14 +81,11 @@ describe("ECDSA P384", () => {
         template: "P384ScalarMult",
         params: [48, 8],
       });
-      const then = Date.now();
       console.log("#constraints:", await circuit.getConstraintCount());
-      const now = Date.now();
-      console.log("#time:", (now - then) / 1000);
     });
 
     describe("should compute properly", async () => {
-      for(let i = 0; i < 1; i++) {
+      for(let i = 23; i < 24; i++) {
         const currentPoint = P384TestCases[i];
         const currentPoint_X = currentPoint.x;
         const currentPoint_Y = currentPoint.y;
@@ -98,12 +94,9 @@ describe("ECDSA P384", () => {
         const currentPoint_WORDS = [currentPoint_X_WORDS, currentPoint_Y_WORDS];
         
         it(`for ${currentPoint.k}.G`, async () => {
-          const then = Date.now();
           await circuit.expectPass({ scalar: splitToWords(BigInt(P384TestCases[i].k), 48n, 8n), point: G_WORDS }, { out: currentPoint_WORDS });
-          const now = Date.now();
-          console.log("#time:", (now - then) / 1000);
-        }); 
+        })
       }
-    })
+    });
   })
 });
