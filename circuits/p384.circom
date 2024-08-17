@@ -3,6 +3,14 @@ pragma circom 2.1.8;
 include "circom-pairing/circuits/curve.circom";
 include "p384_func.circom";
 
+// Adds two unequal points on the P-384 elliptic curve
+// n: Number of bits in each limb (must be 48)
+// k: Number of limbs (must be 8)
+// Inputs:
+//   a[2][k]: First point on the curve, represented as [x, y] coordinates
+//   b[2][k]: Second point on the curve, represented as [x, y] coordinates
+// Output:
+//   out[2][k]: Resulting point after addition, represented as [x, y] coordinates
 template P384AddUnequal(n, k) {
     assert(n == 48 && k == 8);
     signal input a[2][k];
@@ -16,6 +24,13 @@ template P384AddUnequal(n, k) {
     signal output out[2][k] <== adder.out;
 }
 
+// Doubles a point on the P-384 elliptic curve
+// n: Number of bits in each limb (must be 48)
+// k: Number of limbs (must be 8)
+// Input:
+//   in[2][k]: Point on the curve to be doubled, represented as [x, y] coordinates
+// Output:
+//   out[2][k]: Resulting point after doubling, represented as [x, y] coordinates
 template P384Double(n, k) {
     assert(n == 48 && k == 8);
     signal input in[2][k];
@@ -30,6 +45,14 @@ template P384Double(n, k) {
     signal output out[2][k] <== doubler.out;
 }
 
+// Performs scalar multiplication on the P-384 elliptic curve
+// n: Number of bits in each limb (implicitly defined in the code)
+// k: Number of limbs (implicitly defined in the code)
+// Inputs:
+//   scalar[k]: Scalar value for multiplication
+//   point[2][k]: Base point on the curve, represented as [x, y] coordinates
+// Output:
+//   out[2][k]: Resulting point after scalar multiplication, represented as [x, y] coordinates
 template P384ScalarMult(n, k) {
     signal input scalar[k];
     signal input point[2][k];

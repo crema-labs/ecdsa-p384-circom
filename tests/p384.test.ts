@@ -73,7 +73,7 @@ describe("ECDSA P384", () => {
     });
   });
 
-  describe.only("ECDSA Scalar Multiplication", () => {
+  describe("ECDSA Scalar Multiplication", () => {
     let circuit: WitnessTester<["scalar", "point"], ["out"]>;
     before(async () => {
       circuit = await circomkit.WitnessTester(`P384ScalarMult_64_6`, {
