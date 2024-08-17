@@ -32,7 +32,9 @@ jobs:
         run: circom --version
 
       - name: Install dependencies
-        run: yarn
+        run: | 
+        git submodule update --init
+        yarn
 
       - name: Run tests
         run: yarn test
