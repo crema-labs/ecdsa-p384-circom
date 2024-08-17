@@ -121,10 +121,13 @@ template ECDSAPrivToPub(n, k) {
     }
 }
 
-// r, s, msghash, and pubkey have coordinates
-// encoded with k registers of n bits each
-// signature is (r, s)
-// Does not check that pubkey is valid
+// Verifies an ECDSA signature 
+// note: without checking the validity of the public key
+// Inputs:
+//   r[k]: r component of the signature
+//   s[k]: s component of the signature
+//   msghash[k]: Hash of the message
+//   pubkey[2][k]: Public key coordinates
 template ECDSAVerifyNoPubkeyCheck(n, k) {
     assert(k >= 2);
     assert(k <= 100);
@@ -222,20 +225,6 @@ template ECDSAVerifyNoPubkeyCheck(n, k) {
     res_comp.in[0] <== k;
     res_comp.in[1] <== num_equal[k - 2];
     result <== res_comp.out;
-}
-
-// TODO: implement ECDSA extended verify
-// r, s, and msghash have coordinates
-// encoded with k registers of n bits each
-// v is a single bit
-// extended signature is (r, s, v)
-template ECDSAExtendedVerify(n, k) {
-    signal input r[k];
-    signal input s[k];
-    signal input v;
-    signal input msghash[k];
-
-    signal output result;
 }
 
 function div_ceil(m, n) {

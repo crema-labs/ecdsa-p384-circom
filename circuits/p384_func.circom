@@ -60,6 +60,7 @@ function get_p384_order(n, k) {
     return ret;
 }
 
+// P-384 parameters
 function get_p384_params() {
     var A[8] = get_A(48, 8);
     var B[8] = get_B(48, 8);

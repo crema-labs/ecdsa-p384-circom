@@ -2,10 +2,6 @@ import { WitnessTester } from "circomkit";
 import { hexToBigInt, splitToWords } from "../src";
 import { circomkit } from "./common";
 import P384TestCases from "./testcases/p384.json";
-import {ec} from "elliptic";
-import * as crypto from "crypto";
-import * as bip66 from "bip66";
-import { decode } from "./utils";
 
 describe("ECDSA P384", () => {
   
