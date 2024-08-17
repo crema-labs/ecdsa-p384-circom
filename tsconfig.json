@@ -4,6 +4,7 @@
     "module": "commonjs",
     "types": ["mocha", "node"],
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true
   }
