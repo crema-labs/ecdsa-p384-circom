@@ -6,6 +6,7 @@
     "compile:test": "npx circomkit compile add && npx circomkit prove add default && npx circomkit verify add default"
   },
   "dependencies": {
+    "bip66": "^2.0.0",
     "circomkit": "^0.0.22",
     "circomlib": "^2.0.5",
     "elliptic": "^6.5.7",

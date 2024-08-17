@@ -1,36 +1,16 @@
 import { WitnessTester } from "circomkit";
 import crypto from "crypto";
-import elliptic from "elliptic";
-import { splitToWords } from "../src";
+import { ec } from "elliptic";
+import { hexToBigInt, splitToWords } from "../src";
 import { circomkit } from "./common";
+import { decode } from "./utils";
 
-describe("ECDSA P384", () => {
-  describe.only("ECDSA P384 Signature Verify", () => {
+describe("ECDSA", () => {
+  describe('should be able to verify signature', () => {
     let circuit: WitnessTester<["r", "s", "msghash", "pubkey"], ["result"]>;
-    const EC = new elliptic.ec("p256");
-    const keyPair = EC.genKeyPair();
-
-    let message = "Crema Labs";
-    let messageHash = crypto.createHash("sha384").update(message).digest("hex");
-    let message_words = splitToWords(BigInt("0x" + messageHash), 48n, 8n);
-
-    const pubKey = keyPair.getPublic();
-
-    let signature = keyPair.sign(message.toString());
-    let signature_r = BigInt(signature.r.toString());
-    let signature_s = BigInt(signature.s.toString());
-    let pubKey_X = BigInt(pubKey.getX().toString());
-    let pubKey_Y = BigInt(pubKey.getY().toString());
-
-    let signature_r_words = splitToWords(signature_r, 48n, 8n);
-    let signature_s_words = splitToWords(signature_s, 48n, 8n);
-    let pubKey_X_words = splitToWords(pubKey_X, 48n, 8n);
-    let pubKey_Y_words = splitToWords(pubKey_Y, 48n, 8n);
-
-    console.log("message:", pubKey_X_words, pubKey_Y_words);
 
     before(async () => {
-      circuit = await circomkit.WitnessTester(`ECDSAVerifyNoPubkeyCheck_48_8`, {
+      circuit = await circomkit.WitnessTester(`ECDSAVerifyNoPubkeyCheck_64_6`, {
         file: "ecdsa",
         template: "ECDSAVerifyNoPubkeyCheck",
         params: [48, 8],
@@ -38,16 +18,22 @@ describe("ECDSA P384", () => {
       console.log("#constraints:", await circuit.getConstraintCount());
     });
 
-    it("should verify a valid signature", async () => {
-      await circuit.expectPass(
-        {
-          r: signature_r_words,
-          s: signature_s_words,
-          msghash: message_words,
-          pubkey: [pubKey_X_words, pubKey_Y_words],
-        },
-        { result: 1 }
-      );
-    });
-  });
-});
+    it("should be able to verify signatures", () => {
+      const p384 = new ec('p384');
+      const keyPair = p384.genKeyPair();
+
+      const msgHash = crypto.createHash("sha384").update("hello world").digest("hex");
+      const signature = keyPair.sign(msgHash);
+
+      const decodedRes = decode(Uint8Array.from(signature.toDER()));
+      const r = splitToWords(hexToBigInt(Buffer.from(decodedRes.r).toString("hex")), 48n, 8n);
+      const s = splitToWords(hexToBigInt(Buffer.from(decodedRes.s).toString("hex")), 48n, 8n);
+
+      const pubkey = Buffer.from(keyPair.getPublic("hex"), "hex");
+      const pubkey_x = splitToWords(hexToBigInt(pubkey.subarray(1, 1 + 48).toString("hex")), 48n, 8n);
+      const pubkey_y = splitToWords(hexToBigInt(pubkey.subarray(49, 49 + 48).toString("hex")), 48n, 8n);
+
+      circuit.expectPass({ r, s, msghash: splitToWords(hexToBigInt(msgHash), 48n, 8n), pubkey: [pubkey_x, pubkey_y] }, { result: [1] });
+    })
+  })
+})
