@@ -39,7 +39,7 @@ yarn test -g <template-name>
 ```
 
 ## Benchmarks
-
+All tests were performed on a MacBook Pro M1 2020 with 8GB RAM. 
 | Operation                      | Constraints | Time (ms) |
 | ------------------------------ | ----------- | --------- |
 | ECDSA Signature Verification   | 4,429,227   | 4,21,394 |
