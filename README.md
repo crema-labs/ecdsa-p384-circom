@@ -47,6 +47,9 @@ yarn test -g <template-name>
 | ECDSA Point Addition (Equal)   | 6,000       | 573       |
 | ECDSA Scalar Multiplication    | 3,977,848   | 4,20,964    |
 
+
+# Credits
+This project was made possible thanks to the support of [ZK Email](https://github.com/zkemail) and [OpenPassport](https://github.com/zk-passport) for the grant.
 # Acknowledgments
 
 This project builds upon the excellent work of the [circom-ecdsa-p256](https://github.com/privacy-scaling-explorations/circom-ecdsa-p256) by PSE and [circom-ecdsa](https://github.com/0xPARC/circom-ecdsa) by 0xPARC. We are grateful for their contributions to implementation of ECDSA in Circom, which formed the foundation for our work.
