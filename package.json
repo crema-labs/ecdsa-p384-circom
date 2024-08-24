@@ -2,6 +2,8 @@
   "name": "@crema-labs/ecdsa-p384-circom",
   "description": "ECDSA P384 implementation for circom",
   "license": "MIT",
+  "main": "index.js",
+  "version": "0.0.1",
   "scripts": {
     "start": "npx ts-node ./src/index.ts",
     "test": "NODE_OPTIONS=--max-old-space-size=51200 npx mocha --timeout 1000000000"
@@ -16,9 +18,13 @@
     "zk",
     "zk-snarks"
   ],
+  "files": [
+    "circuits",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/crema-labs/ecdsa-p384-circom.git"
+    "url": "git+https://github.com/crema-labs/ecdsa-p384-circom.git"
   },
   "contributors": [
     "Vikas Rushi <0xvikas@gmail.com>",
