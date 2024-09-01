@@ -23,6 +23,7 @@ describe("ECDSA", () => {
       const keyPair = p384.genKeyPair();
 
       const msgHash = crypto.createHash("sha384").update("hello world").digest("hex");
+      const wrongMessageHash = crypto.createHash("sha384").update("Sui Sui").digest("hex");
       const signature = keyPair.sign(msgHash);
 
       const decodedRes = decode(Uint8Array.from(signature.toDER()));
@@ -34,8 +35,13 @@ describe("ECDSA", () => {
       const pubkey_y = splitToWords(hexToBigInt(pubkey.subarray(49, 49 + 48).toString("hex")), 48n, 8n);
 
       circuit.expectPass(
+        { r, s, msghash: splitToWords(hexToBigInt(wrongMessageHash), 48n, 8n), pubkey: [pubkey_x, pubkey_y] },
+        { result: "0" }
+      );
+
+      circuit.expectPass(
         { r, s, msghash: splitToWords(hexToBigInt(msgHash), 48n, 8n), pubkey: [pubkey_x, pubkey_y] },
-        { result: [1] }
+        { result: "1" }
       );
     });
   });
