@@ -4,6 +4,16 @@ This repository provides implementations of Elliptic Curve Digital Signature Alg
 
 > Note: These circuits not audited and not yet recommended for production use.
 
+## Usage
+
+```bash
+yarn add @crema-labs/ecdsa-p384-circom
+```
+
+```circom
+include "@crema-labs/ecdsa-p384-circom/circuits/ecdsa.circom";
+```
+
 ## Setup
 
 ```sh
@@ -39,17 +49,19 @@ yarn test -g <template-name>
 ```
 
 ## Benchmarks
-All tests were performed on a MacBook Pro M1 2020 with 8GB RAM. 
-| Operation                      | Constraints | Time (ms) |
-| ------------------------------ | ----------- | --------- |
-| ECDSA Signature Verification   | 4,429,227   | 4,21,394 |
-| ECDSA Point Addition (Unequal) | 4,352       | 850       |
-| ECDSA Point Addition (Equal)   | 6,000       | 573       |
-| ECDSA Scalar Multiplication    | 3,977,848   | 4,20,964    |
 
+All tests were performed on a MacBook Pro M1 2020 with 8GB RAM.
+| Operation | Constraints | Time (ms) |
+| ------------------------------ | ----------- | --------- |
+| ECDSA Signature Verification | 4,429,227 | 4,21,394 |
+| ECDSA Point Addition (Unequal) | 4,352 | 850 |
+| ECDSA Point Addition (Equal) | 6,000 | 573 |
+| ECDSA Scalar Multiplication | 3,977,848 | 4,20,964 |
 
 # Credits
+
 This project was made possible thanks to the support of [ZK Email](https://github.com/zkemail) and [OpenPassport](https://github.com/zk-passport) for the grant.
+
 # Acknowledgments
 
 This project builds upon the excellent work of the [circom-ecdsa-p256](https://github.com/privacy-scaling-explorations/circom-ecdsa-p256) by PSE and [circom-ecdsa](https://github.com/0xPARC/circom-ecdsa) by 0xPARC. We are grateful for their contributions to implementation of ECDSA in Circom, which formed the foundation for our work.
